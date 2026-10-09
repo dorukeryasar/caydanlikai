@@ -1,4 +1,15 @@
 export default function handler(req, res) {
+    // Tüm sitelerden ve kaynaklardan erişime izin veren CORS başlıkları
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, OPTIONS');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+
+    // Tarayıcıların ön kontrol (preflight) isteklerini yanıtla
+    if (req.method === 'OPTIONS') {
+        res.status(200).end();
+        return;
+    }
+
     const konular = ["patates", "muz", "tavuk", "uzaylı", "pizza", "kaplumbağa", "kedi", "çorap"];
     const eylemler = ["neden düşünür", "neden yuvarlanır", "neden konuşmaz", "neden kayar", "neden uçmaz"];
     const cevaplar = ["Bilim bunu açıklayamadı", "Muhtemelen uzaylılar yaptı", "Çünkü evren öyle istedi", "Bu tamamen patates teorisi"];
